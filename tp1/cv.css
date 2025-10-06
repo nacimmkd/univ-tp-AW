@@ -1,0 +1,47 @@
+body {
+      background-color: #e9ebee;
+      font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+      font-size: 16px;
+      margin: 0 auto;
+      max-width: 800px;
+      padding: 1rem;
+}
+
+table {
+    width: 100%;
+}
+
+table, td ,tr {
+    border: 1px solid black;
+}
+
+.titre {
+    text-align: center;
+}
+
+img {
+    width: 50px;
+}
+
+
+.link {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 5px solid;
+    border-image: linear-gradient(to right, red, rgb(0, 51, 255)) 1;
+}
+
+.link:hover {
+    color: rgb(96, 96, 242);
+}
+
+
+@media only screen and (max-width: 600px) {
+    body {
+        background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    }
+}
