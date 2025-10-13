@@ -7,34 +7,50 @@
   <title>TP2</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <!-- Place favicon.ico in the root directory -->
-
-  <style>
-    body {
-      background-color: #e9ebee;
-      font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco",
-        "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
-      font-size: 16px;
-      margin: 0 auto;
-      max-width: 800px;
-    }
-  </style>
-
-  <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
-  <!--<link rel="stylesheet" href="style.css">-->
-  <!--<script src="js/main.js"></script>-->
+  <link rel="stylesheet" href="styles/form.css">
+  <script src="action.js"></script>
 </head>
 
 <body>
-  <nav>
-    <a href="..">🏠 Index</a> / TP2
-  </nav>
-  <h1>tp2</h1>
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <img src="../galilee.png" alt="Logo Galilee" />
+  <div>
+    <h1>TP 2</h1>
+    <form id="form" action="result.html" method="post">
+      <p>
+        <label for="lastname">Nom</label>
+        <input type="text" name="lastname" minlength="2" maxlength="20" required />
+        <span class="icon-ok">✔</span>
+      </p>
+
+      <p>
+        <label for="firstname">Prénom</label>
+        <input type="text" name="firstname" minlength="2" maxlength="20" required />
+        <span class="icon-ok">✔</span>
+      </p>
+
+      <p>
+        <label for="birthday">Date de naissance</label>
+        <input type="date" name="birthday" required />
+        <span class="icon-ok">✔</span>
+      </p>
+
+      <p>
+        <label for="address">Addresse</label>
+        <input type="text" name="address" minlength="2" maxlength="30" required />
+        <span class="icon-ok">✔</span>
+      </p>
+
+      <p>
+        <label for="email">Email</label>
+        <input type="email" name="email" minlength="2" maxlength="20" required />
+        <span class="icon-ok">✔</span>
+      </p>
+
+      <p class="submit" >
+        <input type="submit" id="submitBtn" name="firstname" />
+      </p>
+    </form>
+  </div>
 </body>
 
 </html>
