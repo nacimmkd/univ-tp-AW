@@ -9,13 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="styles/form.css">
-  <script src="action.js"></script>
+  <script src="js/action.js"></script>
 </head>
 
 <body>
   <div>
     <h1>TP 2</h1>
-    <form id="form" action="result.html" method="post">
+    <form id="form" action="result.html" method="get">
       <p>
         <label for="lastname">Nom</label>
         <input type="text" name="lastname" minlength="2" maxlength="20" required />
@@ -47,7 +47,7 @@
       </p>
 
       <p class="submit" >
-        <input type="submit" id="submitBtn" name="firstname" />
+        <input type="submit" id="submitBtn" name="submit" />
       </p>
     </form>
   </div>

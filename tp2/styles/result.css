@@ -1,0 +1,81 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #007bff, #00bcd4);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 80px auto;
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.result-card p {
+  font-size: 1rem;
+  color: #333;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  position: relative; /* pour placer icon de email et adress */
+}
+
+.result-card strong {
+  color: #007bff;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+}
+
+a {
+  color: black;
+}
+
+.with_icon::after {
+  content: ">";
+  position: absolute;
+  font-weight: bold;
+  top: 40%;
+  right: 15px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  animation: moveRightLeft 1s linear infinite;
+}
+
+
+@keyframes moveRightLeft {
+  0% {
+    right: 10px;
+  } 50% {
+    right : 5px;
+  } 100% {
+    right : 10px;
+  }
+}

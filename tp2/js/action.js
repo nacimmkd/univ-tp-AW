@@ -1,8 +1,7 @@
 window.onload = function () {
+
   const form = document.getElementById("form");
   const submitBtn = document.getElementById("submitBtn");
-
-  // Récupère tous les inputs du formulaire
   const inputs = form.querySelectorAll("input[type='text'], input[type='email'], input[type='date']");
   
   // Fonction pour valider chaque champ
@@ -11,7 +10,6 @@ window.onload = function () {
     const type = input.type;
     let valid = false;
 
-    // Validation selon le type
     if (type === "text") {
       valid = value.length >= input.minLength && value.length <= input.maxLength;
     } else if (type === "email") {
@@ -21,10 +19,9 @@ window.onload = function () {
       valid = value !== "";
     }
 
-    // Trouve le span juste à côté de l’input
+
     const span = input.parentElement.querySelector(".icon-ok");
 
-    // Affiche ou cache le ✔ selon la validité
     if (valid) {
       span.style.visibility = "visible";
       span.style.color = "green";
@@ -35,7 +32,8 @@ window.onload = function () {
     return valid;
   }
 
-  // Vérifie tous les champs pour activer/désactiver le bouton
+
+  // Activer/Désactiver le bouton submit
   function checkFormValidity() {
     let allValid = true;
     inputs.forEach((input) => {
@@ -46,7 +44,8 @@ window.onload = function () {
     submitBtn.disabled = !allValid;
   }
 
-  // Écouteur sur tous les inputs pour vérifier à chaque saisie
+  
+  // Main
   inputs.forEach((input) => {
     input.addEventListener("input", () => {
       validateInput(input);
