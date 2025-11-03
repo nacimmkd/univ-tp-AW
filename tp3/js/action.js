@@ -8,7 +8,6 @@ window.onload = function () {
     const icon = document.createElement("span");
     icon.className = "icon-ok ms-2";
     icon.style.visibility = "hidden";
-    icon.textContent = "✅";
     input.parentElement.appendChild(icon);
   });
 
