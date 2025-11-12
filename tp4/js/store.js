@@ -53,15 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('form');
   const resultsTableBody = document.getElementById('resultsTableBody');
 
-  const cleanInputs = () => {
-    const inputs = form.querySelectorAll("input[type='text'], input[type='email'], input[type='date']");
-    
-    inputs.forEach(input => {
-        input.value = '';
-        const span = input.parentElement.querySelector(".icon-ok");
-        span.style.visibility = "hidden";
-    });
-  }
 
   // list all
   const displayContactList = () => {
@@ -90,9 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   // add
-  form.addEventListener('submit', function (event) {
-    event.preventDefault(); 
-    event.stopPropagation();
+  form.addEventListener('submit', function () {
 
     form.classList.add('was-validated');
 
@@ -113,8 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       displayContactList();
 
-      // Réinitialise le formulaire
-      form.reset();
       form.classList.remove('was-validated');
     } else {
       console.warn("Formulaire non valide");
