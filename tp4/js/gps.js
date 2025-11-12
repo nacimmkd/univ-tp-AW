@@ -42,8 +42,8 @@ function showPosition(position) {
         </iframe>
       `;
 
-    // 2. Appelle la fonction de mise à jour en LUI PASSANT les coordonnées
-    updateAdresseInput(lat, lon);
+    const addressInput = document.getElementById('address');
+    addressInput.value = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
 }
 
 // Au cas où l'utilisateur refuse ou si une erreur arrive
@@ -68,50 +68,3 @@ function showError(error) {
 
 
 
-
-// pour remplir le champ adresse (input) et la valider
-function updateAdresseInput(lat, lon) {
-
-    const addressInput = document.getElementById('address');
-    
- 
-    const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
-    
-    if (addressInput) {
-        addressInput.classList.remove('is-invalid'); 
-        addressInput.classList.remove('is-valid'); // Optionnel, mais plus sûr
-    }
-
-
-    fetch(nominatimUrl)
-        .then(response => response.json())
-        .then(data => {
-            let address = "Adresse exacte non trouvée.";
-            
-            if (data.display_name) {
-                address = data.display_name;
-            }
-            
-            if (addressInput) {
-                addressInput.value = address;
-
-                // validation
-                if (addressInput.checkValidity()) {
-                    addressInput.classList.remove('is-invalid');
-                    addressInput.classList.add('is-valid'); 
-                } else {
-                    addressInput.classList.remove('is-valid');
-                    addressInput.classList.add('is-invalid'); 
-                }
-                // ------------------------------------------------
-            }
-        })
-        .catch(error => {
-            console.error("Erreur de géocodage inversé:", error);
-            if (addressInput) {
-                addressInput.value = "Erreur de connexion à l'API.";
-                addressInput.classList.add('is-invalid'); // Marque comme invalide suite à l'échec de l'API
-                addressInput.classList.remove('is-valid');
-            }
-        });
-}

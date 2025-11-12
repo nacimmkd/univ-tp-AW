@@ -1,7 +1,7 @@
 window.onload = function () {
   const form = document.getElementById("form");
   const submitBtn = document.getElementById("submitBtn");
-  const inputs = form.querySelectorAll("input[type='text'], input[type='email'], input[type='date']");
+  const inputs = form.querySelectorAll("input[type='text']:not(#address), input[type='email'], input[type='date']");
 
 
   inputs.forEach((input) => {

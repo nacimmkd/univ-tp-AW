@@ -15,12 +15,16 @@
     }
 
     .form-container {
-      max-width: 700px;
+      max-width: 1000px;
       margin: 60px auto;
       background: #fff;
       padding: 40px 50px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #form_container {
+      max-width: 700px;
     }
 
     label {
@@ -30,11 +34,12 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="form-container">
-      <h1 class="mb-4 text-center text-primary">TP 4 — Formulaire</h1>
 
-      <form id="form" action="result.html" method="get" class="needs-validation" novalidate>
+  <div class="container" id="form_container">
+    <div class="form-container">
+      <h1 class="mb-4 text-center text-primary">Contact</h1>
+
+      <form id="form" method="get" action="#" class="needs-validation" novalidate>
 
         <div class="row mb-3 align-items-center">
           <label for="lastname" class="col-sm-3 col-form-label text-end">Nom :</label>
@@ -80,7 +85,7 @@
           <div class="col-sm-3"></div>
           <div class="col-sm-9">
             <div id="map" style="height: 200px; border: 1px solid #ccc; border-radius: 4px; padding: 15px; text-align: center; color: #6c757d; background-color: #f9f9f9;">
-              Cliquez sur le bouton ci-dessus pour afficher votre position.
+              Cliquez sur GPS ci-dessus pour afficher votre position.
             </div>
           </div>
         </div>
@@ -101,9 +106,32 @@
       </form>
     </div>
   </div>
+
+  <div class="container">
+    <div class="form-container">
+      <h2 class="mb-3 text-primary text-center">Contacts</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Date de naissance</th>
+              <th>Adresse</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody id="resultsTableBody">
+            <tr><td colspan="5" class="text-center text-muted">No data pour le l'instant.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   
   <script src="js/count.js"></script> 
   <script src="js/gps.js"></script> 
   <script src="js/validation.js"></script> 
+  <script src="js/store.js"></script>
 </body>
 </html>
