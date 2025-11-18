@@ -72,6 +72,42 @@ window.onload = function () {
           }
       },
 
+      getCurrentCity: function() {
+        if (!navigator.geolocation) {
+          alert("La géolocalisation n'est pas supportée par votre navigateur");
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          try {
+            // fetch (OpenStreetMap) pour récupérer la ville
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+            const data = await response.json();
+
+            // Vérifie si on a bien une ville
+            if (data.address && data.address.city) {
+              this.formCityName = data.address.city;
+            } else if (data.address && data.address.town) {
+              this.formCityName = data.address.town;
+            } else if (data.address && data.address.village) {
+              this.formCityName = data.address.village;
+            } else {
+              this.formCityName = '';
+              alert("Impossible de récupérer la ville actuelle.");
+            }
+          } catch (error) {
+            console.error(error);
+            alert("Erreur lors de la récupération de la ville.");
+          }
+        }, (error) => {
+          console.error(error);
+          alert("Impossible d'obtenir votre position GPS.");
+          })
+      },
+
 
       remove: function (_city) {
         this.cityList = this.cityList.filter(city => city.name != _city.name)
