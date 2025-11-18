@@ -55,8 +55,13 @@ window.onload = function () {
         if(this.isCityExist(this.formCityName)){
           this.messageForm = 'existe déjà';
         }else{
-          this.cityList.push({ name: this.formCityName });
+          
+          const newCity = { name: this.formCityName };
+          this.cityList.push(newCity);
           this.messageForm = "";
+
+          // call metro function a chaque fois GO est cliqué
+          this.meteo(newCity);
           this.formCityName = "";
         }
       },
