@@ -9,10 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/weather-icons.min.css" />
 
     <style>
         body {
-            background-color: #f8f9fa; /* Couleur de fond douce */
+            /*background-color: #f8f9fa; /* Couleur de fond douce */
+            background: linear-gradient(to right, #3B82F6, #9333EA);
             font-family: "Helvetica Neue", Arial, sans-serif;
             font-size: 16px;
             margin: 0 auto;
@@ -53,12 +55,12 @@
     <div id="weatherApp" class="container">
 
         <!-- Formulaire de saisie de ville -->
-        <div class="form-container">
+        <div class="form-container border border-primary-subtle border-1">
             <form v-on:submit="addCity">
-                <div class="input-group mb-3">
+                <div class="input-group mb-2 d-flex gap-2">
                     <input
                         type="search"
-                        class="form-control"
+                        class="form-control p-2 border border-primary rounded-3"
                         v-model="formCityName"
                         placeholder="Entrez le nom d'une ville"
                         aria-label="Search for..."
@@ -66,7 +68,7 @@
                         required
                     />
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">Go</button>
+                        <button class="btn btn-primary p-2 border rounded-3" type="submit">Go</button>
                     </div>
                 </div>
 
@@ -81,8 +83,8 @@
         </div>
 
         <!-- Liste des villes -->
-        <div class="card shadow-sm">
-            <div class="card-header">
+        <div class="card shadow-sm mb-4 border-primary-subtle rounded-3">
+            <div class="card-header pt-3">
                 <h4>Liste des villes ({{cityList.length}})</h4>
             </div>
             <ul class="list-group p-1">
@@ -104,10 +106,14 @@
         </div>
 
         <!-- meteo de la ville selectionnée -->
-        <div v-if="cityWeatherLoading">Chargement de la météo...</div>
+        <div v-if="cityWeatherLoading" class="d-flex justify-content-center" style="height: 100vh;" role="status">
+            <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div>
 
-        <div v-if="cityWeather">
-            <div class="card" style="width: 18rem;" v-if="cityWeather">
+        <div class="mb-5 border-primary-subtle rounded-3" v-if="cityWeather">
+            <div class="card" style="max-width: 100%;" v-if="cityWeather">
                 <div class="card-header">{{cityWeather.name}} @{{cityWheaterDate}}</div>
                 <iframe
                 class="card-img-top"
@@ -116,7 +122,7 @@
                 height="200"
                 frameborder="0"
                 scrolling="no"
-                v-bind:src="'url de l iframe Open street map'"
+                v-bind:src="'https://www.openstreetmap.org/export/embed.html?bbox=' + openStreetMapArea + '&layer=mapnik&marker=' + cityWeather.coord.lat + '%2C' + cityWeather.coord.lon"
                 >
                 </iframe>
 
