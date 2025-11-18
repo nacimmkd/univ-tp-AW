@@ -14,17 +14,15 @@
     <style>
         body {
             /*background-color: #f8f9fa; /* Couleur de fond douce */
-            background: linear-gradient(to right, #5b84ff, #ffffff8d);
+            background: linear-gradient(to bottom, #5b84ff, #ffffff8d);
             font-family: "Helvetica Neue", Arial, sans-serif;
             font-size: 16px;
+            height: 100vh;
             margin: 0 auto;
             max-width: 800px;
             padding-top: 30px;
         }
 
-        .container {
-            padding-top: 20px;
-        }
 
         .form-container {
             background-color: #ffffff;
@@ -48,6 +46,11 @@
 
 <body>
     <div id="weatherApp" class="container">
+
+        <div class="mb-4 d-flex justify-content-center bg-primary bg-gradient py-4 rounded shadow-sm">
+            <h1 class="text-white m-0 fw-bold display-5">Weather App ☀️</h1>
+        </div>
+
 
         <!-- Formulaire de saisie de ville -->
         <div class="form-container border border-primary-subtle border-1">
