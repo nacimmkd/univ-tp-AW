@@ -102,10 +102,7 @@ window.onload = function () {
             console.error(error);
             alert("Erreur lors de la récupération de la ville.");
           }
-        }, (error) => {
-          console.error(error);
-          alert("Impossible d'obtenir votre position GPS.");
-          })
+        })
       },
 
 
