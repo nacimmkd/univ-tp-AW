@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
@@ -7,33 +7,154 @@
     <title>TP5</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
 
     <style>
         body {
-            background-color: #e9ebee;
-            font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+            background-color: #f8f9fa; /* Couleur de fond douce */
+            font-family: "Helvetica Neue", Arial, sans-serif;
             font-size: 16px;
             margin: 0 auto;
             max-width: 800px;
+            padding-top: 30px;
         }
+
+        .container {
+            padding-top: 20px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background-color: #455871; /* Bleu Bootstrap */
+            color: white;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        a:hover {
+            background-color: #45587127;
+        }
+
     </style>
 
-    <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
-    <!--<link rel="stylesheet" href="style.css">-->
-    <!--<script src="main.js"></script>-->
 </head>
 
 <body>
-    <nav>
-        <a href="..">🏠 Index</a> / TP5
-    </nav>
-    <h1>TP5</h1>
-    <!-- Add your site or application content here -->
-    <p>Hello world! This is HTML5 Boilerplate.</p>
-    <img src="../galilee.png" alt="Logo Galilee" />
+    <div id="weatherApp" class="container">
+
+        <!-- Formulaire de saisie de ville -->
+        <div class="form-container">
+            <form v-on:submit="addCity">
+                <div class="input-group mb-3">
+                    <input
+                        type="search"
+                        class="form-control"
+                        v-model="formCityName"
+                        placeholder="Entrez le nom d'une ville"
+                        aria-label="Search for..."
+                        autofocus
+                        required
+                    />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Go</button>
+                    </div>
+                </div>
+
+                <!-- Affichage du nombre de caractères saisis -->
+                <small class="text-muted"> {{ formCityName.length }} car.</small>
+
+                <!-- Message d'erreur -->
+                <div class="alert alert-danger mt-3" role="alert" v-if="messageForm != ''">
+                    {{ messageForm }}
+                </div>
+            </form>
+        </div>
+
+        <!-- Liste des villes -->
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4>Liste des villes ({{cityList.length}})</h4>
+            </div>
+            <ul class="list-group p-1">
+                <a
+                    v-for="city in cityList"
+                    v-on:click="meteo(city)"
+                    class="list-group-item d-flex justify-content-between align-items-center m-1 border border-primary-subtle "
+                >
+                    {{city.name}}
+                    <button
+                    v-on:click="remove(city)"
+                    class="btn btn-secondary btn-sm"
+                    title="Supprimer de la liste"
+                    >
+                    &times;
+                    </button>
+                </a>
+            </ul>
+        </div>
+
+        <!-- meteo de la ville selectionnée -->
+        <div v-if="cityWeatherLoading">Chargement de la météo...</div>
+
+        <div v-if="cityWeather">
+            <div class="card" style="width: 18rem;" v-if="cityWeather">
+                <div class="card-header">{{cityWeather.name}} @{{cityWheaterDate}}</div>
+                <iframe
+                class="card-img-top"
+                alt="Card image cap"
+                width="100%"
+                height="200"
+                frameborder="0"
+                scrolling="no"
+                v-bind:src="'url de l iframe Open street map'"
+                >
+                </iframe>
+
+                <div class="card-body">
+                <h5 class="card-title">
+                    <i v-bind:class="'wi wi-owm-day-'+cityWeather.weather[0].id"></i>
+                    {{cityWeather.main.temp}}<i class="wi wi-celsius"></i>
+                </h5>
+                <p class="card-text">{{cityWeather.weather[0].description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <i class="wi wi-cloud"></i> Nuage: {{cityWeather.clouds.all}}%
+                </li>
+                <li class="list-group-item">
+                    <i class="wi wi-humidity"></i> Humidité: {{cityWeather.main.humidity}}%
+                </li>
+                <li class="list-group-item">
+                    <i class="wi wi-windy"></i> Vent: {{cityWeather.wind.speed}} km/h
+                </li>
+                <li class="list-group-item">
+                    <i class="wi wi-sunrise"></i>
+                    Levé du soleil: {{new Date(cityWeather.sys.sunrise *
+                    1000).toTimeString()}}
+                </li>
+                <li class="list-group-item">
+                    <i class="wi wi-sunset"></i>
+                    Couché du soleil: {{new Date(cityWeather.sys.sunset *
+                    1000).toTimeString()}}
+                </li>
+                </ul>
+            </div>
+        </div>  
+
+    </div>
+    <script src="js/libs/vue.js"></script>
+    <script src="js/libs/bootstrap.bundle.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
