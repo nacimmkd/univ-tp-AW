@@ -1,4 +1,4 @@
-<form class="mb-4 p-4 bg-body-secondary rounded" (ngSubmit)="onSubmit()">
+<form class="mb-4 p-4 bg-secondary" (ngSubmit)="onSubmit()">
   <div class="input-group mb-2">
     <input
       type="search"
@@ -53,9 +53,10 @@
   </li>
 </ul>
 
-<div class="alert bg-body-secondary mt-3" *ngIf="cityList.length === 0">
+<div class="alert alert-info mt-3" *ngIf="cityList.length === 0">
   Aucune ville saisie !
 </div>
+
 
 
 
