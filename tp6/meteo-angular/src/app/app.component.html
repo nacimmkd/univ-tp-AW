@@ -1,19 +1,21 @@
 <body>
   <main class="main">
-    <div class="content">
+    <div class="container">
 
-      <!-- menu du haut de page -->
-      <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
-          <a class="navbar-brand" routerLink="/">🏠</a>
+      <!-- Menu du haut de page -->
+      <header class="bg-primary rounded-4 shadow-sm mb-4 p-3">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container-fluid d-flex justify-content-between align-items-center">
+            <h1 class="fs-2 fw-bold h3 mb-0 text-white">{{ title }}</h1>
+            <a class="btn btn-light btn-lg" routerLink="/" title="Accueil">🏠</a>
+          </div>
         </nav>
+      </header>
 
-        <div>
-          <h1>{{ title }}!</h1>
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-      <!-- fin : menu du haut de page -->
+      <!-- Contenu principal injecté par le router -->
+      <section>
+        <router-outlet></router-outlet>
+      </section>
 
     </div>
   </main>
