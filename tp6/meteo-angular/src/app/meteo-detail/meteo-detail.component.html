@@ -1,53 +1,64 @@
-<!-- meteo de la ville selectionnée -->
-<!-- meteo de la ville selectionnée -->
-<div *ngIf="meteo && meteo.cod == 200">
 
-  <div class="card mb-6" style="width:300px; margin: 0 auto" v-if="meteo">
-    <div class="card-header">
-      {{ meteo.name }} / {{ meteo.dt * 1000 | date : "EEEE d LLLL HH:mm" }}
-    </div>
-    <a
-      href="http://maps.google.com/maps?q={{ latlon }}&ll={{ latlon }}&z=5"
-      target="_blank"
-    >
-      <img
-        class="card-img-top"
-        src="https://maps.googleapis.com/maps/api/staticmap?markers={{
-          latlon
-        }}&zoom=5&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg"
-        alt="Card image cap"
-      />
-    </a>
-    <div class="card-body">
-      <h5 class="card-title">
-        <i v-bind:class="'wi wi-owm-day-'+meteo.weather[0].id"></i>
-        {{meteo.main.temp}}
-        <i class="wi wi-celsius"></i>
+<div *ngIf="meteo && meteo.cod == 200" class="d-flex justify-content-center mb-4">
+
+  <div class="card shadow-lg rounded" style="max-width: 700px; width: 100%;">
+
+   
+    <div class="card-header text-center bg-primary text-white">
+      <h5 class="mb-1">
+        <i [class]="'wi wi-owm-' + meteo.weather[0].icon"></i>
+        {{ meteo.name }}
       </h5>
-      <p class="card-text">{{meteo.weather[0].description}}</p>
+      <small>{{ meteo.dt * 1000 | date : "EEEE d LLLL HH:mm" }}</small>
     </div>
+
+  
+    <a href="http://maps.google.com/maps?q={{ latlon }}&ll={{ latlon }}&z=5" target="_blank">
+      <img class="card-img-top rounded-top"
+        [src]="'https://maps.googleapis.com/maps/api/staticmap?markers=' + latlon + '&zoom=5&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg'"
+        alt="Carte de la ville" />
+    </a>
+
+
+    <div class="card-body text-center">
+      <h3 class="card-title display-5">
+        <i [class]="'wi wi-owm-' + meteo.weather[0].icon"></i>
+        {{ meteo.main.temp }}<i class="wi wi-celsius"></i>
+      </h3>
+      <p class="card-text text-capitalize">
+        <i [class]="'wi wi-owm-' + meteo.weather[0].icon"></i>
+        {{ meteo.weather[0].description }}
+      </p>
+    </div>
+
+
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <i class="wi wi-cloud"></i> Nuage: {{meteo.clouds.all}}%
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><i class="wi wi-cloud"></i> Nuages</span>
+        <span>{{ meteo.clouds.all }}%</span>
       </li>
-      <li class="list-group-item">
-        <i class="wi wi-humidity"></i> Humidité: {{meteo.main.humidity}}%
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><i class="wi wi-humidity"></i> Humidité</span>
+        <span>{{ meteo.main.humidity }}%</span>
       </li>
-      <li class="list-group-item">
-        <i class="wi wi-windy"></i> Vent: {{meteo.wind.speed}} km/h
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><i class="wi wi-strong-wind"></i> Vent</span>
+        <span>{{ meteo.wind.speed }} km/h</span>
       </li>
-      <li class="list-group-item">
-        <i class="wi wi-sunrise"></i> Levé du soleil: {{meteo.sys.sunrise}} //
-        Date au format Timestamp à transformer au format 'H:mm'
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><i class="wi wi-sunrise"></i> Levée du soleil</span>
+        <span>{{ meteo.sys.sunrise * 1000 | date:'HH:mm' }}</span>
       </li>
-      <li class="list-group-item">
-        <i class="wi wi-sunset"></i>Couché du soleil: {{meteo.sys.sunset}} //
-        Date au format Timestamp à transformer au format 'H:mm'
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><i class="wi wi-sunset"></i> Couché du soleil</span>
+        <span>{{ meteo.sys.sunset * 1000 | date:'HH:mm' }}</span>
       </li>
     </ul>
+
   </div>
 </div>
 
-<div class="alert alert-danger" *ngIf="meteo && meteo.cod != 200">
-  {{meteo.message}} (erreur {{meteo.cod}})
+
+<div class="alert alert-danger text-center" *ngIf="meteo && meteo.cod != 200">
+  <i class="bi bi-exclamation-triangle-fill"></i> {{ meteo.message }} (erreur {{ meteo.cod }})
 </div>
