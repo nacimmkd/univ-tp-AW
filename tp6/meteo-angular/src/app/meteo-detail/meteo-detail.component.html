@@ -1,56 +1,65 @@
-
 <div *ngIf="meteo && meteo.cod == 200" class="d-flex justify-content-center mb-4">
 
   <div class="card shadow-lg rounded" style="max-width: 700px; width: 100%;">
 
-   
+
     <div class="card-header text-center bg-primary text-white">
-      <h5 class="mb-1">
-        <i [class]="'wi wi-owm-' + meteo.weather[0].icon"></i>
+      <h5 class="mb-1 fw-bold fs-4">
+        <i [class]="'wi wi-owm-' + meteo.weather[0].id"></i>
         {{ meteo.name }}
       </h5>
       <small>{{ meteo.dt * 1000 | date : "EEEE d LLLL HH:mm" }}</small>
     </div>
 
-  
+   
     <a href="http://maps.google.com/maps?q={{ latlon }}&ll={{ latlon }}&z=5" target="_blank">
       <img class="card-img-top rounded-top"
         [src]="'https://maps.googleapis.com/maps/api/staticmap?markers=' + latlon + '&zoom=5&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg'"
         alt="Carte de la ville" />
     </a>
+    
+    <!--
+    <a [href]="'https://www.openstreetmap.org/?mlat=' + lat + '&mlon=' + lon + '#map=5/' + lat + '/' + lon"
+      target="_blank">
+      <img class="card-img-top rounded-top"
+        [src]="'https://staticmap.openstreetmap.de/staticmap.php?center=' + latlon + '&zoom=5&size=400x300&markers=' + latlon"
+        alt="Carte de la ville">
+    </a>
+    -->
+
 
 
     <div class="card-body text-center">
-      <h3 class="card-title display-5">
-        <i [class]="'wi wi-owm-' + meteo.weather[0].icon"></i>
-        {{ meteo.main.temp }}<i class="wi wi-celsius"></i>
+      <h3 class="card-title display-5 text-primary">
+        <i [class]="'wi wi-owm-' + meteo.weather[0].id"></i>
+        {{ meteo.main.temp | number: '1.0-0' }}<i class="wi wi-celsius"></i>
       </h3>
-      <p class="card-text text-capitalize">
-        <i [class]="'wi wi-owm-' + meteo.weather[0].icon"></i>
+      <p class="card-text text-capitalize fw-bold fs-6">
+        <i [class]="'wi wi-owm-' + meteo.weather[0].id"></i>
         {{ meteo.weather[0].description }}
       </p>
     </div>
 
 
     <ul class="list-group list-group-flush">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span><i class="wi wi-cloud"></i> Nuages</span>
+      <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+        <span><i class="wi wi-cloud text-primary fs-4"></i> Nuages</span>
         <span>{{ meteo.clouds.all }}%</span>
       </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span><i class="wi wi-humidity"></i> Humidité</span>
+      <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+        <span><i class="bi bi-droplet-fill text-primary fs-4"></i> Humidité</span>
         <span>{{ meteo.main.humidity }}%</span>
       </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span><i class="wi wi-strong-wind"></i> Vent</span>
+      <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+        <span><i class="wi wi-strong-wind text-primary fs-4"></i> Vent</span>
         <span>{{ meteo.wind.speed }} km/h</span>
       </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span><i class="wi wi-sunrise"></i> Levée du soleil</span>
+      <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+        <span><i class="wi wi-sunrise text-primary fs-4"></i> Levée du soleil</span>
         <span>{{ meteo.sys.sunrise * 1000 | date:'HH:mm' }}</span>
       </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span><i class="wi wi-sunset"></i> Couché du soleil</span>
+      <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+        <span><i class="wi wi-sunset text-primary fs-4"></i> Couché du soleil</span>
         <span>{{ meteo.sys.sunset * 1000 | date:'HH:mm' }}</span>
       </li>
     </ul>

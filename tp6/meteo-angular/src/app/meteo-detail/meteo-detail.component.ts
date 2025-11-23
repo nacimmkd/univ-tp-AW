@@ -12,6 +12,8 @@ import { MeteoService } from "../services/meteo.service";
 export class MeteoDetailComponent implements OnInit {
   meteo: any;
   latlon: string = "";
+  lat: string = "";
+  lon: string = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +35,8 @@ export class MeteoDetailComponent implements OnInit {
         .getMeteo(name)
         .then((response) => {
           this.meteo = response;
+          this.lat = this.meteo.coord.lat;
+          this.lon = this.meteo.coord.lon
           this.latlon = `${this.meteo.coord.lat},${this.meteo.coord.lon}`;
         })
         .catch((fail) => (this.meteo = fail));
