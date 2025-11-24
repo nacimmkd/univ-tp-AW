@@ -11,6 +11,7 @@ import { MeteoService } from "../services/meteo.service";
 })
 export class MeteoDetailComponent implements OnInit {
   meteo: any;
+  meteoFiveDays: any;    
   latlon: string = "";
   lat: string = "";
   lon: string = "";
@@ -25,21 +26,32 @@ export class MeteoDetailComponent implements OnInit {
   }
 
   getMeteo(): void {
-    // pour lire la paramètre 'name' dans l'URL de la page  comme définit dans le router avec
-    // path: 'meteo/:name'
     const name = this.route.snapshot.paramMap.get("name");
 
-    console.log("getmeteo pour", name);
+    console.log("getMeteo pour", name);
     if (name) {
+      // ---- MÉTÉO ACTUELLE ----
       this.meteoService
         .getMeteo(name)
         .then((response) => {
           this.meteo = response;
           this.lat = this.meteo.coord.lat;
-          this.lon = this.meteo.coord.lon
-          this.latlon = `${this.meteo.coord.lat},${this.meteo.coord.lon}`;
+          this.lon = this.meteo.coord.lon;
+          this.latlon = `${this.lat},${this.lon}`;
         })
         .catch((fail) => (this.meteo = fail));
+
+      // ---- MÉTÉO 5 JOURS ----
+      this.meteoService
+        .getMeteoFiveDays(name)
+        .then((response) => {
+          this.meteoFiveDays = response;
+          console.log("Prévisions 5 jours :", this.meteoFiveDays);
+        })
+        .catch((error) => {
+          console.error(error);
+          this.meteoFiveDays = null;
+        });
     }
   }
 }
