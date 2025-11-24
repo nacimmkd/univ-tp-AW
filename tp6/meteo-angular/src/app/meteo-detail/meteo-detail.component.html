@@ -1,5 +1,7 @@
-<div *ngIf="meteo && meteo.cod == 200" class="d-flex justify-content-between gap-5 mb-4" style="width: 100%;">
+<div *ngIf="meteo && meteo.cod == 200" class="d-flex justify-content-between gap-5 mb-4" style="width: 100%;"
+  id="meteo">
 
+  <!-- MATEO INFO -->
   <div class="card shadow-lg rounded" style="max-width: 500px; width: 100%;">
 
     <div class="card-header text-center bg-primary text-white">
@@ -19,16 +21,7 @@
     </a>
     -->
 
-    <!--
-    <a [href]="'https://www.openstreetmap.org/?mlat=' + lat + '&mlon=' + lon + '#map=5/' + lat + '/' + lon"
-      target="_blank">
-      <img class="card-img-top rounded-top"
-        [src]="'https://staticmap.openstreetmap.de/staticmap.php?center=' + latlon + '&zoom=5&size=400x300&markers=' + latlon"
-        alt="Carte de la ville">
-    </a>
-    -->
-
-    <div class="container">
+    <div class="container mb-3 border">
 
 
       <!-- DEBUT main meteo component -->
@@ -73,39 +66,33 @@
 
   </div>
 
- <!-- PRÉVISIONS SUR 5 JOURS -->
-<div *ngIf="meteoFiveDays" class="w-100 d-flex flex-column gap-2 mt-3">
+  <!-- PRÉVISIONS SUR 5 JOURS -->
+  <div *ngIf="meteoFiveDays" class="w-100 d-flex flex-column gap-2 mt-3">
 
-  <h3 class="text-center fw-bold mb-3">Prévisions sur 5 jours</h3>
+    <h3 class="text-center fw-bold mb-3 ">Prévisions sur 5 jours</h3>
 
-  <ng-container *ngFor="let day of meteoFiveDays.list">
+    <ng-container *ngFor="let day of meteoFiveDays.list">
 
-    <div
-      *ngIf="day.dt_txt.includes('12:00:00')"
-      class="card shadow-lg rounded border-primary-subtle"
-    >
-      <div
-        class="card-header text-center bg-light.bg-gradient d-flex flex-row align-items-center justify-content-between"
-      >
-        <small class="fw-bold fs-5 text-black">
-          {{ day.dt * 1000 | date : "EEEE d" }}
-        </small>
+      <div *ngIf="day.dt_txt.includes('12:00:00')" class="card shadow-lg rounded border-primary-subtle"
+        (click)="selectDay(day)" style="cursor: pointer;" id="card">
+        <div
+          class="card-header text-center bg-light.bg-gradient d-flex flex-row align-items-center justify-content-between">
+          <small class="fw-bold fs-5 text-black">
+            {{ day.dt * 1000 | date : "EEEE d" }}
+          </small>
 
-        <h3 class="card-title display-5 text-primary fs-2 fw-bold">
-          <i [class]="'wi wi-owm-' + day.weather[0].icon"></i>
-           {{ (day.main.temp - 273.15) | number: '1.0-0' }}
-          <i class="wi wi-celsius"></i>
-        </h3>
+          <h3 class="card-title display-5 text-primary fs-2 fw-bold">
+            <i [class]="'wi wi-owm-' + day.weather[0].icon"></i>
+            {{ (day.main.temp - 273.15) | number: '1.0-0' }}
+            <i class="wi wi-celsius"></i>
+          </h3>
+        </div>
       </div>
-    </div>
 
-  </ng-container>
-</div>
+    </ng-container>
+  </div>
 
-
-
-
-
+  <!-- ERROR IN FETCH -->
   <div class="alert alert-danger text-center" *ngIf="meteo && meteo.cod != 200">
     <i class="bi bi-exclamation-triangle-fill"></i> {{ meteo.message }} (erreur {{ meteo.cod }})
   </div>

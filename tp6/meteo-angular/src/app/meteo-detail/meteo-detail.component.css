@@ -1,0 +1,13 @@
+#card:hover {
+    background-color: #cfe2ff;
+}
+
+@media (max-width:800px) {
+    #meteo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 1rem;
+    }
+
+}

@@ -11,7 +11,7 @@ import { MeteoService } from "../services/meteo.service";
 })
 export class MeteoDetailComponent implements OnInit {
   meteo: any;
-  meteoFiveDays: any;    
+  meteoFiveDays: any;
   latlon: string = "";
   lat: string = "";
   lon: string = "";
@@ -19,7 +19,7 @@ export class MeteoDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private meteoService: MeteoService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getMeteo();
@@ -54,4 +54,28 @@ export class MeteoDetailComponent implements OnInit {
         });
     }
   }
+
+  selectDay(day: any) {
+    this.meteo = {
+      ...this.meteo, // garde la structure EXACTE de la météo actuelle
+
+      dt: day.dt,
+      weather: day.weather,
+      main: {
+        ...this.meteo.main,
+        temp: day.main.temp - 273.15,
+        humidity: day.main.humidity,
+      },
+      wind: {
+        ...this.meteo.wind,
+        speed: day.wind.speed,
+      },
+      clouds: {
+        ...this.meteo.clouds,
+        all: day.clouds.all,
+      }
+    };
+  }
+
+
 }
